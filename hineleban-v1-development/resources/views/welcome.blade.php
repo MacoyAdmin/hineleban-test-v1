@@ -63,59 +63,26 @@
        <div class="row" style="background:#e6e2d3">
        <div class="container-fluid">
        <div class="row">
-        <h1 style="text-align:center">Products</h1>
+        <h1 style="text-align:center">Featured Products</h1>
         <a  href="" style="text-align:right">Go to market >></a>
       </div>
        </div>
+       @foreach($products as $item)
+       @if($item->isFeatured == 1)
             <div class="col-sm-3" style="margin-top:25px; margin-bottom:25px">
               <div class="card" style="width: 18rem;">
-                <a href="www.google.com"  target="_blank"  style="text-decoration: none; color:black">
-                        <img src="{{URL::asset('/media/media2.jpg')}}"  class="card-img-top" alt="...">
+                <a href="product?id={{$item->ProductId}}"  target="_blank"  style="text-decoration: none; color:black">
+                        <img src="{{URL::asset('/media/'.$item->ResourcePath)}}"  class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Item 1</h5>
-                        <p class="card-subtitle mb-2 text-muted">Some Item Description sample test. Some Item Description sample test </p>
-                        <h5 class="card-title" style="color:#FFA500">₱450.00</h5>
+                        <h5 class="card-title">{{$item->ProductName}}</h5>
+                        <p class="card-subtitle mb-2 text-muted"  style=" width: 250px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{$item->ProductDes}}</p>
+                        <h5 class="card-title" style="color:#FFA500">₱{{$item->Price}}.00</h5>
                     </div>
                 </a>
               </div>
             </div>
-
-            <div class="col-sm-3" style="margin-top:25px; margin-bottom:25px">
-              <div class="card" style="width: 18rem;">
-                <a href="www.google.com"  target="_blank"  style="text-decoration: none; color:black">
-                        <img src="{{URL::asset('/media/media2.jpg')}}"  class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Item 1</h5>
-                        <p class="card-subtitle mb-2 text-muted">Some Item Description sample test. Some Item Description sample test </p>
-                        <h5 class="card-title" style="color:#FFA500">₱450.00</h5>
-                    </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-sm-3" style="margin-top:25px; margin-bottom:25px">
-              <div class="card" style="width: 18rem;">
-                <a href="www.google.com"  target="_blank"  style="text-decoration: none; color:black">
-                        <img src="{{URL::asset('/media/media2.jpg')}}"  class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Item 1</h5>
-                        <p class="card-subtitle mb-2 text-muted">Some Item Description sample test. Some Item Description sample test </p>
-                        <h5 class="card-title" style="color:#FFA500">₱450.00</h5>
-                    </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-sm-3" style="margin-top:25px; margin-bottom:25px">
-              <div class="card" style="width: 18rem;">
-                <a href="www.google.com"  target="_blank"  style="text-decoration: none; color:black">
-                        <img src="{{URL::asset('/media/media2.jpg')}}"  class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Item 1</h5>
-                        <p class="card-subtitle mb-2 text-muted">Some Item Description sample test. Some Item Description sample test </p>
-                        <h5 class="card-title" style="color:#FFA500">₱450.00</h5>
-                    </div>
-                </a>
-              </div>
-            </div>
+            @endif
+            @endforeach
             
         </div>
        </div>

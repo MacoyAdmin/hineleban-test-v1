@@ -20,44 +20,6 @@
         <a href="/" class="nav-link" target="_blank">Live Site View</a>
       </li>
     </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -97,6 +59,7 @@
                       <th>Email</th>
                       <th>Username</th>
                       <th>Role</th>
+                      <th>Password</th>
                       <th style="width: 40px">Active</th>
                       <th>Action</th>
                     </tr>
@@ -108,21 +71,33 @@
                       <td>{{$user->EmailAddress}}</td>
                       <td>{{$user->UserName}}</td>
                       <td>{{$user->UserRole}}</td>
-                      <td><span class="badge bg-success">{{$user->Active}}</span></td>
+                      <?php 
+                      if($user->Active == 1){
+                        $badge ="bg-success";
+                        $text = "YES";
+                      }else{
+                        $badge ="bg-danger";
+                        $text = "NO";
+                      }
+                      ?>
+                      <td> <div class="collapse" id="collapseExample{{$user->UserId}}">
+                        <div class="card card-body">
+                        {{$user->Password}}
+                        </div>
+                      </div></td>
+                      <td><span class="badge {{$badge}}">{{$text}}</span></td>
                       <td>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-warning btn-flat">
+                        <a type="button" class="btn btn-warning btn-flat" data-toggle="collapse" data-target="#collapseExample{{$user->UserId}}" aria-expanded="false" aria-controls="collapseExample">
                           <i class="fas fa-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-primary btn-flat">
+                        </a>
+                        <a type="button" class="btn btn-primary btn-flat" href="./manageuser/update/{{$user->UserId}}">
                           <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-flat">
-                          <i class="fas fa-trash"></i>
-                        </button>
+                       </a>
                       </div>
                       </td>
                     </tr>
+                   
                     @endforeach
                   </tbody>
                 </table>
@@ -130,7 +105,7 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-   
+
           </div>
           <!-- /.col -->
         </div>

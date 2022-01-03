@@ -13,6 +13,8 @@ use App\Http\Controllers\managejobOrder;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\addtocartController;
 use App\Http\Controllers\transactionController;
+use App\Http\Controllers\adduser;
+use App\Http\Controllers\addproduct;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +30,7 @@ use App\Http\Controllers\transactionController;
 Route::get('/home', function () {
     return view('welcome');
 });
-
+Route::get("/home", [ProductController::class,'GetProductsWelcome']);
 Route::get('/', function () {
     return redirect('home');
 });
@@ -115,15 +117,18 @@ Route::post("users", [userLogin::class,'getData']);
 Route::view("login","login");
 
 Route::post("product", [addtocartController::class,'addtocart']);
-Route::post("adduser", [adduser::class,'adduser']);
-
+Route::post("/admin/adduser", [adduser::class,'adduser']);
+Route::post("/admin/addproduct", [addproduct::class,'addProduct']);
 Route::post("register", [userRegistration::class,'addUser']);
 
 Route::post("clientcart", [transactionController::class,'addtotransaction']);
 Route::post("upload", [UploadController::class,'index']);
 
 Route::get("store", [ProductController::class,'GetProducts']);
+Route::get("/", [ProductController::class,'GetProductsWelcome']);
 Route::get("admin/manageproduct", [ProductController::class,'GetProductsStockManage']);
+Route::get("admin/dashboard", [ProductController::class,'GetProductsStockDashboard']);
+
 Route::get("admin/managestock", [manageStock::class,'getStocks']);
 Route::get("admin/inventory", [manageStock::class,'getInventory']);
 Route::get("admin/manageorder", [managejobOrder::class,'getJO']);
@@ -135,6 +140,8 @@ Route::get("clientcart", [cartController::class,'getCart']);
 Route::get("invoice", [cartController::class,'getCartInvoice']);
 Route::get("orders", [cartController::class,'getTransaction']);
 Route::get("orderhistory", [cartController::class,'getTransactionHistory']);
+Route::get("admin/manageuser/update/{id}", [manageUserController::class,'updateData']);
+Route::post("admin/edituser", [manageUserController::class,'submitUpdate']);
 
 Route::get('/logout', function () {
     if(session()->has('firstname'))

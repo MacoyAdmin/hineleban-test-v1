@@ -35,11 +35,29 @@ class ProductController extends Controller
         return  view('admin/manageproduct',['products'=> $products]);
    
     }
+    function GetProductsStockDashboard()
+    {
+        
+        $products =  DB::select('select * from productstbl');
+        //session()->put('productInfo', $products);
+    
+        return  view('admin/dashboard',['products'=> $products]);
+   
+    }
     function getItem(Request $req)
     {
         $products =  DB::select('select * from productstbl where productid="'.$req->id.'"');
         //session()->put('productInfo', $products);
         //return  redirect('product');
         return  view('product',['products'=> $products]);
+    }
+    function GetProductsWelcome()
+    {
+        
+        $products =  DB::select('select * from productstbl where isfeatured=1 order by productid desc limit 4');
+        //session()->put('productInfo', $products);
+    
+        return  view('welcome',['products'=> $products]);
+   
     }
 }
