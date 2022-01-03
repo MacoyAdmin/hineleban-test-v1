@@ -119,7 +119,7 @@
                       <td>{{$item->MfgDate}}</td>
                       <td>{{$item->Expiration}}</td>
                       <td>{{$item->isFeatured}}</td>
-                      <td><img src="{{$item->ResourcePath}}" width="30%"></td>
+                      <td><img src="{{URL::asset('/media/'.$item->ResourcePath)}}" width="30%"></td>
                       <td>{{$item->Active}}</td>
                       <td><span class="badge bg-success"></span></td>
                       <td>

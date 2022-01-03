@@ -84,19 +84,20 @@
         <div class="row">
           <div class="col-md-12">
            
-          <form>
+          <form action="./addproduct" method="POST">
+            @csrf
             <div class="form-group col-md-8">
                 <label for="inputPassword4">Product Name</label>
-                <input type="text" class="form-control" id="inputPassword4" placeholder="Product Name">
+                <input type="text" class="form-control" name="productname" placeholder="Product Name">
               </div>
               <div class="form-group col-md-8">
                 <label for="inputPassword4">Product Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="productdes" rows="3"></textarea>
               </div>
               <div class="form-row">
                   <div class="form-group col-md-2">
                   <label for="inputState">Category</label>
-                    <select id="inputState" class="form-control">
+                    <select name="category" class="form-control">
                       <option>0</option>
                       <option selected>1</option>
                     </select>

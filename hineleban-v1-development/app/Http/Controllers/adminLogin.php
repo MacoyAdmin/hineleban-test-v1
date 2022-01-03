@@ -12,8 +12,8 @@ class adminLogin extends Controller
     {
         
         $data=$req->input();  
-        $query =  DB::select('select * from usertbl where emailaddress="'.$data['emailaddress'].'" and password="'.$data['password'].'"')[0];
-        if($query->EmailAddress == $data['emailaddress'] && $query->Password == $data['password'])
+        $query =  DB::select('select * from usertbls where emailaddress="'.$data['emailaddress'].'" or username="'.$data['emailaddress'].'" and password="'.$data['password'].'"')[0];
+        if($query->EmailAddress == $data['emailaddress'] || $query->UserName == $data['emailaddress']&& $query->Password == $data['password'])
         {
         $req->session()->put('firstname',$query->FirstName);
         $req->session()->put('lastname',$query->LastName);

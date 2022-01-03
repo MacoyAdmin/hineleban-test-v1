@@ -10,9 +10,13 @@ class adduser extends Controller
     function adduser(Request $req)
     {     
         $user = new usertbl;
-        //$cart->ProductId=$req->ProductId;
- 
-        //$cart->save();
-        return $req;
+        $user->UserName=$req->username;
+        $user->EmailAddress=$req->email;
+        $user->UserRole=$req->role;
+        $user->FirstName=$req->firstname;
+        $user->LastName=$req->lastname;
+        $user->Password=$req->password;
+        $user->save();
+        return redirect('admin/manageuser');
     }
 }
