@@ -45,8 +45,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-           
-          <form action="./adduser" method="POST">
+          <form action="./adduser" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -88,7 +87,10 @@
               </div>
             
             </div>
-          
+            <div class="mb-3 col-md-4">
+            <label for="formFile" class="form-label">Image</label>
+            <input class="form-control" type="file" name="file">
+          </div>
             <button type="submit" class="btn btn-primary">Create</button>
           </form>
           </div>

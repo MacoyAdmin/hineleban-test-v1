@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class productstbl extends Model
 {
+    protected $primaryKey = 'ProductId';
     use HasFactory;
 }

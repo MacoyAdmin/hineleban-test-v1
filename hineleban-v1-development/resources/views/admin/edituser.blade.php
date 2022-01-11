@@ -44,9 +44,8 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
-           
-          <form action="../../edituser" method="POST">
+          <div class="col-md-8">  
+          <form action="../../editproduct" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="text" name="id" value="{{$data['UserId']}}" hidden>
             <div class="form-row">
@@ -88,13 +87,26 @@
                   <option value="0" <?php echo $data['Active'] == "0" ? "selected" : "" ?>>In-Active</option>
                 </select>
               </div>
-            
+              <button type="submit" class="btn btn-primary">Update</button>
             </div>
           
-            <button type="submit" class="btn btn-primary">Update</button>
-          </form>
+          
           </div>
-          <!-- /.col -->
+          <div class="col-sm-4">
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="inputEmail4">Image</label>
+                    <div class="col-xs-7">
+                    <img src="/media/{{$data['resourcepath']}}" width="50%">
+                    
+                    </div>
+                  <br>
+                  <input type="file" class="form-control" name="file" value="{{$data['resourcepath']}}" placeholder="Firstname">
+              </div>
+          </div>
+            
+          </form>
+          </div>          <!-- /.col -->
         </div>
         <!-- /.row -->
 

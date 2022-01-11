@@ -14,6 +14,7 @@ use App\Http\Controllers\cartController;
 use App\Http\Controllers\addtocartController;
 use App\Http\Controllers\transactionController;
 use App\Http\Controllers\adduser;
+use App\Http\Controllers\addstock;
 use App\Http\Controllers\addproduct;
 
 /*
@@ -120,6 +121,7 @@ Route::post("product", [addtocartController::class,'addtocart']);
 Route::post("/admin/adduser", [adduser::class,'adduser']);
 Route::post("/admin/addproduct", [addproduct::class,'addProduct']);
 Route::post("register", [userRegistration::class,'addUser']);
+Route::post("/admin/addstock", [addstock::class,'addStock']);
 
 Route::post("clientcart", [transactionController::class,'addtotransaction']);
 Route::post("upload", [UploadController::class,'index']);
@@ -141,7 +143,13 @@ Route::get("invoice", [cartController::class,'getCartInvoice']);
 Route::get("orders", [cartController::class,'getTransaction']);
 Route::get("orderhistory", [cartController::class,'getTransactionHistory']);
 Route::get("admin/manageuser/update/{id}", [manageUserController::class,'updateData']);
+Route::get("admin/manageproduct/update/{id}", [manageUserController::class,'updateProduct']);
+Route::get("admin/manageproduct/delete/{id}", [manageUserController::class,'disableProduct']);
+Route::get("admin/manageproduct/enable/{id}", [manageUserController::class,'enableProduct']);
+Route::get("admin/manageproduct/feature/{id}", [manageUserController::class,'featureProduct']);
+
 Route::post("admin/edituser", [manageUserController::class,'submitUpdate']);
+Route::post("admin/editproduct", [ProductController::class,'submitUpdate']);
 
 Route::get('/logout', function () {
     if(session()->has('firstname'))

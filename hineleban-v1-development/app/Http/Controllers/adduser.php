@@ -16,6 +16,12 @@ class adduser extends Controller
         $user->FirstName=$req->firstname;
         $user->LastName=$req->lastname;
         $user->Password=$req->password;
+ 
+        if($req->file != '' || $req->file != null)
+        {
+            $file = $req->file('file')->store('user');
+            $user->resourcepath=$file;
+        }
         $user->save();
         return redirect('admin/manageuser');
     }

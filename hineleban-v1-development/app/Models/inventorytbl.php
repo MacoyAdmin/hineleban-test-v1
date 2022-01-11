@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class customertbls extends Model
+class inventorytbl extends Model
 {
+    protected $primaryKey = 'InventoryId';
     use HasFactory;
 }

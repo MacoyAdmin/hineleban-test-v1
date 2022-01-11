@@ -73,7 +73,7 @@
               <div class="icon">
                 <i class="fas fa-shopping-cart"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="./manageorder" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -283,7 +283,7 @@
                           die("Connection failed: " . $conn->connect_error);
                         }
   
-                        $sql = "SELECT productname FROM productstbl where productid=$productId";
+                        $sql = "SELECT productname FROM productstbls where productid=$productId";
                         
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
@@ -352,7 +352,7 @@
                         die("Connection failed: " . $conn->connect_error);
                       }
 
-                      $sql = "SELECT productname FROM productstbl where productid=$item->ProductId";
+                      $sql = "SELECT productname FROM productstbls where productid=$item->ProductId";
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                         // output data of each row

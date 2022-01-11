@@ -56,9 +56,11 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">Employee ID</th>
+                      <th style="width: 30px">Image</th>
                       <th>Email</th>
                       <th>Username</th>
                       <th>Role</th>
+                      
                       <th>Password</th>
                       <th style="width: 40px">Active</th>
                       <th>Action</th>
@@ -68,9 +70,17 @@
                     @foreach($users as $user)
                     <tr>
                       <td>{{$user->UserId}}</td>
+                      <td>
+                        @if($user->resourcepath == null || $user->resourcepath == '')
+                        <img src="{{URL::asset('/media/noImg.png')}}" width="100%" alt="no image found">
+                        @else
+                        <img src="{{URL::asset('/media/'.$user->resourcepath)}}" width="100%" alt="no image found">
+                        @endif
+                      </td>
                       <td>{{$user->EmailAddress}}</td>
                       <td>{{$user->UserName}}</td>
                       <td>{{$user->UserRole}}</td>
+                      
                       <?php 
                       if($user->Active == 1){
                         $badge ="bg-success";
