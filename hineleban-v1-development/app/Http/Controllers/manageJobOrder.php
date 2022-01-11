@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class manageJobOrder extends Controller
 {
     function getJO(){
-        $jo =  DB::select('select * from joborder');
+        $jo =  DB::select('select * from transactiontbls');
         //session()->put('productInfo', $products);
     
         return  view('admin/manageorder',['jo'=> $jo]);

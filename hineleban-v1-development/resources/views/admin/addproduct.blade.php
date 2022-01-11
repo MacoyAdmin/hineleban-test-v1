@@ -84,45 +84,56 @@
         <div class="row">
           <div class="col-md-12">
            
-          <form>
+          <form action="./addproduct" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="form-group col-md-8">
                 <label for="inputPassword4">Product Name</label>
-                <input type="text" class="form-control" id="inputPassword4" placeholder="Product Name">
+                <input type="text" class="form-control" name="productname" placeholder="Product Name">
               </div>
               <div class="form-group col-md-8">
                 <label for="inputPassword4">Product Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="productdes" rows="3"></textarea>
               </div>
               <div class="form-row">
                   <div class="form-group col-md-2">
                   <label for="inputState">Category</label>
-                    <select id="inputState" class="form-control">
+                    <select name="category" class="form-control">
                       <option>0</option>
                       <option selected>1</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                  <label for="inputState">IsFeatured </label>
+                    <select name="IsFeatured" class="form-control">
+                      <option value="0">False</option>
+                      <option value="1" selected>True</option>
                     </select>
                   </div>
 
                   <div class="form-group col-md-2">
                     <label for="inputPassword4">Unit</label>
-                    <input type="number" class="form-control" id="inputPassword4" placeholder="Unit" min="1">
+                    <input type="number" class="form-control" name="unit" placeholder="Unit" min="0.01" step=".01">
                   </div>
 
                   <div class="form-group col-md-2">
                     <label for="inputPassword4">Price</label>
-                    <input type="number" class="form-control" id="inputPassword4" placeholder="Price">
+                    <input type="number" class="form-control" name="price" placeholder="Price" step=".01" min="0.01">
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="inputPassword4">Manufacturing Date</label>
-                    <input type="date" class="form-control" id="inputPassword4" placeholder="Product Name">
+                    <input type="date" class="form-control" name="mfgdate">
                   </div>
                   <div class="form-group col-md-4">
                     <label for="inputPassword4">Expiration Date</label>
-                    <input type="date" class="form-control" id="inputPassword4" placeholder="Product Name">
+                    <input type="date" class="form-control" name="expdate" >
                   </div>
-                  </div>
-            
+              </div>
+                  <div class="mb-3 col-md-4">
+            <label for="formFile" class="form-label">Image</label>
+            <input class="form-control" type="file" name="file">
+          </div>
             <button type="submit" class="btn btn-primary">Add Product</button>
           </form>
    

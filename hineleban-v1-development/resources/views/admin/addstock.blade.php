@@ -83,10 +83,11 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-          <form>
+          <form action="./addstock" method="post">
+            @csrf
             <div class="form-group col-md-8">
                 <label for="inputPassword4">Product Name</label>
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select class="form-control" name="productid">
                 @foreach($products as $item)
                 <option value="{{$item->ProductId}}">{{$item->ProductName}}</option>
                 @endforeach
@@ -96,27 +97,31 @@
               <div class="form-row">
                   <div class="form-group col-md-2">
                     <label for="inputPassword4">Quantity</label>
-                    <input type="number" class="form-control" id="inputPassword4" placeholder="Unit">
+                    <input type="number" class="form-control" name="quantity" placeholder="Quantity" min="1" step="1" required>
                   </div>
 
                   <div class="form-group col-md-2">
                     <label for="inputPassword4">Unit</label>
-                    <input type="number" class="form-control" id="inputPassword4" placeholder="Unit">
+                    <input type="number" class="form-control" name="unit" placeholder="Unit" min="0.01" step=".01" required>
                   </div>
 
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-2">
+                    <label for="inputPassword4">Unit Type</label>
+                    <input type="text" class="form-control" name="unit_type" placeholder="Unit Type" min="0.01" step=".01" required>
+                  </div>
+                  <div class="form-group col-md-2">
                     <label for="inputPassword4">Batch Code</label>
-                    <input type="number" class="form-control" id="inputPassword4" placeholder="Price">
+                    <input type="number" class="form-control" name="batch" placeholder="Batch Code" required>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="inputPassword4">Date Recieved</label>
-                    <input type="date" class="form-control" id="inputPassword4" placeholder="Product Name">
+                    <input type="date" class="form-control" name="date_received">
                   </div>
                   </div>
             
-            <button type="submit" class="btn btn-primary">Add Product</button>
+            <button type="submit" class="btn btn-primary">Add New Stock</button>
           </form>
    
           </div>

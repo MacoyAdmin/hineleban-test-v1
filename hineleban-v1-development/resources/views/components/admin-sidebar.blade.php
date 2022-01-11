@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="./dashboard" class="brand-link">
       <!--<img src="" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
       <span class="brand-text font-weight-light">Hineleban <b>Store</b></span>
     </a>
@@ -11,7 +11,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block">Administrator Name</a>
+          <a href="#" class="d-block">{{session('lastname')}}, {{session('firstname')}}</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -20,7 +20,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
               <li class="nav-item">
-                <a href="./dashboard" class="nav-link active">
+                <a href="../../../admin/dashboard" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -36,13 +36,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./adduser" class="nav-link">
+                <a href="../../../admin/adduser" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New User</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./manageuser" class="nav-link">
+                <a href="../../../admin/manageuser" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage User</p>
                 </a>
@@ -60,13 +60,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./addproduct" class="nav-link">
+                <a href="../../../admin/addproduct" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./manageproduct" class="nav-link">
+                <a href="../../../admin/manageproduct" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Product</p>
                 </a>
@@ -83,13 +83,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./addstock" class="nav-link">
+                <a href="../../../admin/addstock" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New Stock</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./managestock" class="nav-link">
+                <a href="../../../admin/managestock" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Stock</p>
                 </a>
@@ -153,25 +153,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./inventory" class="nav-link">
+                <a href="../../../admin/inventory" class="nav-link">
                   <i class="far fa-calendar-alt nav-icon"></i>
                   <p>Daily</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./inventory" class="nav-link">
+                <a href="../../../admin/inventory" class="nav-link">
                   <i class="far fa-calendar-alt nav-icon"></i>
                   <p>Weekly</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./inventory" class="nav-link">
+                <a href="../../../admin/inventory" class="nav-link">
                   <i class="far fa-calendar-alt nav-icon"></i>
                   <p>Monthly</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./inventory" class="nav-link">
+                <a href="../../../admin/inventory" class="nav-link">
                   <i class="far fa-calendar-alt nav-icon"></i>
                   <p>Yearly</p>
                 </a>

@@ -70,7 +70,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Manage Stocks</h1>
+            <h1 class="m-0">Overall Stocks per Product</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -93,11 +93,11 @@
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr>
-                      <th style="width: 10px">Product ID</th>
+                      <th style="width: 10px">Inventory ID</th>
                       <th>Product Name</th>
                       <th>Unit</th>
+                      <th>Unit Type</th>
                       <th>Quantity</th>
-                      <th>Batch Code</th>
                       <th>Received Date</th>
                       <th style="width: 40px">Active</th>
                       <th>Action</th>
@@ -106,23 +106,67 @@
                   <tbody>
                     @foreach($stocks as $item)
                     <tr>
-                      <td>{{$item->ProductId}}</td>
+                      <td>{{$item->InventoryId}}</td>
+                      <td><?php
+                      $servername = "127.0.0.1";
+                      $username = "root";
+                      $password = "";
+                      $dbname = "hineleban_db";
+
+                      // Create connection
+                      $conn = new mysqli($servername, $username, $password, $dbname);
+                      // Check connection
+                      if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+
+                      $sql = "SELECT productname FROM productstbls where productid=$item->ProductId";
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                          echo $row['productname'];
+                         
+                        }
+                      } else {
+                        echo "0 results";
+                      }
+                      $conn->close();
+                  ?></td>
                       <td>{{$item->unit}}</td>
-                      <td>{{$item->Quantity}}</td>
-                      <td>{{$item->BatchCode}}</td>
+                      <td>{{$item->unit_type}}</td>
+                      <td><?php
+                      $servername = "127.0.0.1";
+                      $username = "root";
+                      $password = "";
+                      $dbname = "hineleban_db";
+
+                      // Create connection
+                      $conn = new mysqli($servername, $username, $password, $dbname);
+                      // Check connection
+                      if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+
+                      $sql = "SELECT sum(Quantity) AS value_qty FROM inventorytbls where productid=$item->ProductId";
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                          echo $row['value_qty'];
+                         
+                        }
+                      } else {
+                        echo "0 results";
+                      }
+                      $conn->close();
+                  ?></td>
                       <td>{{$item->ReceivedDate}}</td>
-                      <td>{{$item->Active}}</td>
                       <td><span class="badge bg-success"></span></td>
                       <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-warning btn-flat">
-                          <i class="fas fa-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-primary btn-flat">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-flat">
-                          <i class="fas fa-trash"></i>
+                          <i class="fas fa-eye"></i> Manage
                         </button>
                       </div>
                       </td>

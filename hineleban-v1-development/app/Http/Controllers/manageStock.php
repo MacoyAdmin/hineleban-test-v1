@@ -10,13 +10,13 @@ class manageStock extends Controller
 {
     //
     function getStocks(){
-        $stocks =  DB::select('select * from inventorytbl');
+        $stocks =  DB::select('select * from inventorytbls group by productid');
         //session()->put('productInfo', $products);
     
         return  view('admin/managestock',['stocks'=> $stocks]);
     }
     function getInventory(){
-        $inventory =  DB::select('select * from inventorytbl');
+        $inventory =  DB::select('select * from inventorytbls');
         //session()->put('productInfo', $products);
     
         return  view('admin/inventory',['inventory'=> $inventory]);

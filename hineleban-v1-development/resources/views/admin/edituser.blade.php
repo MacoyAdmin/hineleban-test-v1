@@ -33,7 +33,7 @@
         <div class="row mb-2">
           <div class="col-sm-12">
           <img src="{{URL::asset('/media/hineleban-logo.png')}}" class="img-fluid mx-auto d-block" alt="Responsive image">
-            <h1 class="m-0">Add New User</h1>
+            <h1 class="m-0">Update User</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -44,57 +44,69 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
-          <form action="./adduser" method="POST" enctype="multipart/form-data">
+          <div class="col-md-8">  
+          <form action="../../editproduct" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="text" name="id" value="{{$data['UserId']}}" hidden>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Firstname</label>
-                <input type="text" class="form-control" name="firstname" placeholder="Firstname">
+                <input type="text" class="form-control" name="firstname" value="{{$data['FirstName']}}" placeholder="Firstname">
               </div>
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Lastname</label>
-                <input type="text" class="form-control" name="lastname"  placeholder="Password">
+                <input type="text" class="form-control" name="lastname" value="{{$data['LastName']}}"  placeholder="Lastname">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="inputEmail4">Username</label>
-                <input type="text" class="form-control" name="username" placeholder="Email">
+                <input type="text" class="form-control" name="username" value="{{$data['UserName']}}" placeholder="Email">
               </div>
               <div class="form-group col-md-4">
                 <label for="inputPassword4">Password</label>
-                <input type="password" class="form-control" name="password"  placeholder="Password">
+                <input type="password" class="form-control" name="password" value="{{$data['Password']}}" placeholder="Password">
               </div>
-              <div class="form-group col-md-4">
-              <label for="inputAddress">Confirm Password</label>
-              <input type="password" class="form-control" name="confirm"  placeholder="test@test.com">
-            </div>
             </div>
            
             <div class="form-row">
                <div class="form-group col-md-4">
               <label for="inputAddress">Email Address</label>
-              <input type="email" class="form-control" name="email"  placeholder="test@test.com">
+              <input type="email" class="form-control" name="email" value="{{$data['EmailAddress']}}"  placeholder="test@test.com">
             </div>
               <div class="form-group col-md-4">
               <label for="inputState">User Role</label>
-                <select name="role"  class="form-control">
-                @foreach($roles as $role)
-                  <option value="{{$role->RoleId}}">{{$role->RoleName}}</option>
-               @endforeach
+                <select name="role"  class="form-control" disabled>
+                  <option value="{{$data['UserRole']}}">{{$data['UserRole']}}</option>
                 </select>
               </div>
-            
+              <div class="form-group col-md-4">
+              <label for="inputState">Active</label>
+                <select name="active" class="form-control">
+                  <option value="1" <?php echo $data['Active'] == "1" ? "selected" : "" ?>>Active</option>
+                  <option value="0" <?php echo $data['Active'] == "0" ? "selected" : "" ?>>In-Active</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
             </div>
-            <div class="mb-3 col-md-4">
-            <label for="formFile" class="form-label">Image</label>
-            <input class="form-control" type="file" name="file">
+          
+          
           </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+          <div class="col-sm-4">
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="inputEmail4">Image</label>
+                    <div class="col-xs-7">
+                    <img src="/media/{{$data['resourcepath']}}" width="50%">
+                    
+                    </div>
+                  <br>
+                  <input type="file" class="form-control" name="file" value="{{$data['resourcepath']}}" placeholder="Firstname">
+              </div>
+          </div>
+            
           </form>
-          </div>
-          <!-- /.col -->
+          </div>          <!-- /.col -->
         </div>
         <!-- /.row -->
 

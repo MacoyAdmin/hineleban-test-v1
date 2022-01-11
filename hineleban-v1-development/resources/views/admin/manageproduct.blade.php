@@ -119,20 +119,36 @@
                       <td>{{$item->MfgDate}}</td>
                       <td>{{$item->Expiration}}</td>
                       <td>{{$item->isFeatured}}</td>
-                      <td><img src="{{$item->ResourcePath}}" width="30%"></td>
-                      <td>{{$item->Active}}</td>
+                      <td>@if($item->ResourcePath == null || $item->ResourcePath == '')
+                        <img src="{{URL::asset('/media/noImg.png')}}" width="50%" alt="no image found">
+                        @else
+                        <img src="{{URL::asset('/media/'.$item->ResourcePath)}}" width="50%" alt="no image found">
+                        @endif</td>
+                        <?php 
+                      if($item->Active == 1){
+                        $badge ="bg-success";
+                        $text = "YES";
+                      }else{
+                        $badge ="bg-danger";
+                        $text = "NO";
+                      }
+                      ?>
+                      <td><span class="badge {{$badge}}">{{$text}}</span</td>
                       <td><span class="badge bg-success"></span></td>
                       <td>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-warning btn-flat">
-                          <i class="fas fa-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-primary btn-flat">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-flat">
-                          <i class="fas fa-trash"></i>
-                        </button>
+                      <a type="button" class="btn btn-warning btn-flat <?php if($item->isFeatured == 1){echo "disabled";}?>" href="./manageproduct/feature/{{$item->ProductId}}" <?php if($item->isFeatured == 1){echo "hidden";}?>>
+                          <i class="fas fa-star"></i> Feature
+                       </a>
+                      <a type="button" class="btn btn-success btn-flat <?php if($item->Active == 1){echo "disabled";}?>" href="./manageproduct/enable/{{$item->ProductId}}" <?php if($item->Active == 1){echo "hidden";}?>>
+                          <i class="fas fa-toggle-on"></i> Enable
+                       </a>
+                      <a type="button" class="btn btn-primary btn-flat" href="./manageproduct/update/{{$item->ProductId}}">
+                          <i class="fas fa-edit"></i> Update
+                       </a>
+                       <a type="button" class="btn btn-danger btn-flat" href="./manageproduct/delete/{{$item->ProductId}}" <?php if($item->Active == 0){echo "hidden";}?>>
+                          <i class="fas fa-trash"> </i> Remove
+                       </a>
                       </div>
                       </td>
                     </tr>

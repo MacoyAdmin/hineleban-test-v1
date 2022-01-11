@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class usertbl extends Model
+class productstbl extends Model
 {
-    protected $primaryKey = 'UserId';
+    protected $primaryKey = 'ProductId';
     use HasFactory;
 }

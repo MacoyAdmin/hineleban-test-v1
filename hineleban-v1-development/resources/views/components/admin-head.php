@@ -20,4 +20,7 @@
   <link rel="stylesheet" href="/../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/../dist/css/adminlte.min.css">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/../plugins/sweetalert2/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="/../plugins/sweetalert2/sweetalert2.min.css">
 </head>

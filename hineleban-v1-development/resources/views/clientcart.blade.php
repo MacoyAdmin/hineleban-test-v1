@@ -42,7 +42,7 @@ $orderid = array();
                         die("Connection failed: " . $conn->connect_error);
                       }
 
-                      $sql = "SELECT resourcepath FROM productstbl where productid=$item->ProductId";
+                      $sql = "SELECT resourcepath FROM productstbls where productid=$item->ProductId";
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                         // output data of each row
@@ -77,7 +77,7 @@ $orderid = array();
                         die("Connection failed: " . $conn->connect_error);
                       }
 
-                      $sql = "SELECT productname FROM productstbl where productid=$item->ProductId";
+                      $sql = "SELECT productname FROM productstbls where productid=$item->ProductId";
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                         // output data of each row

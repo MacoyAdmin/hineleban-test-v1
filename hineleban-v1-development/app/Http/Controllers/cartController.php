@@ -43,4 +43,14 @@ class cartController extends Controller
         return  view('orderhistory',['transaction'=> $transaction]);
    
     }
+    function GetCartDashboard()
+    {
+        
+        $carts =  DB::select('select * from carts ORDER BY cartid DESC
+        LIMIT 10');
+        //session()->put('productInfo', $products);
+    
+        return  view('admin/dashboard',['carts'=> $carts]);
+   
+    }
 }
