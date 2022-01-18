@@ -22,7 +22,7 @@
     </ul>
 
     <!-- Right navbar links -->
-   
+
   </nav>
   <!-- /.navbar -->
 
@@ -34,9 +34,8 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-12">
-          <img src="{{URL::asset('/media/hineleban-logo.png')}}" class="img-fluid mx-auto d-block" alt="Responsive image">
-            <h1 class="m-0">Inventory</h1>
+          <div class="col-sm-6">
+            <h1 class="m-0">View Order</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -49,26 +48,31 @@
         <div class="row">
           <div class="col-md-12">
            
-          <div class="card">
+    <!-- /.card -->
+    <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">List of Products</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+              <div class="card-body p-0">
+                <table class="table table-hover table-striped">
                   <thead>
-                  <tr>
-                    <th>Inventory #</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Batch Code</th>
-                    <th>Received Date</th>
-                  </tr>
+                    <tr>
+                      <th style="width: 10px">Transaction ID</th>
+                      <th>Mode of Payment</th>
+                      <th>Mode of Transfer</th>
+                      <th>Total Price</th>
+                      <th>Job Status</th>
+                      <th>Customer ID</th>
+                      <th>Actions</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  @foreach($inventory as $item)
-                  <tr>
-                    <td>{{$item->InventoryId}}</td>
+                      @foreach($jo as $order)
+                    <td># {{$order->transactionid}}</td>
+                    <td>{{$order->mop}}</td>
+                    <td>{{$order->transfer}}</td>
+                    <td>₱ {{$order->totalPrice}}.00</td>
                     <td><?php
                       $servername = "127.0.0.1";
                       $username = "root";
@@ -82,24 +86,35 @@
                         die("Connection failed: " . $conn->connect_error);
                       }
 
-                      $sql = "SELECT productname FROM productstbls where productid=$item->ProductId";
+                      $sql = "SELECT joname FROM jobstatustbl where jobstatusid=$order->jobstatusid";
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                         // output data of each row
                         while($row = $result->fetch_assoc()) {
-                          echo $row['productname'];
+                          echo $row['joname'];
                         }
                       } else {
                         echo "0";
                       }
                       $conn->close();
                   ?></td>
-                    <td>{{$item->Quantity}}</td>
-                    <td>{{$item->BatchCode}}</td>
-                    <td>{{$item->ReceivedDate}}</td>
-                  </tr>
-                 @endforeach
-                  </tfoot>
+                    <td>{{$order->customerid}}</td>
+                    <td>
+                    <div class="btn-group">
+                    <a type="button" class="btn btn-warning btn-flat" href="./manageproduct/feature/">
+                          <i class="fas fa-eye"></i> View Order
+                       </a>
+
+                      <a type="button" class="btn btn-primary btn-flat" href="./manageproduct/update/">
+                          <i class="fas fa-edit"></i> Manage
+                       </a>
+                       <a type="button" class="btn btn-danger btn-flat" href="./manageorder/reject/{{$order->transactionid}}">
+                          <i class="fas fa-trash"> </i> Rejected
+                       </a>
+                      </div>
+                    </td>
+                    @endforeach
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -129,43 +144,7 @@
   <x-admin-footer/>
 </div>
 <!-- ./wrapper -->
- <!-- jQuery -->
- <script src="/../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="/../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="/../plugins/jszip/jszip.min.js"></script>
-<script src="/../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="/../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="/../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="/../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="/../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
 
-<!-- Page specific script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
 
 </body>
 </html>

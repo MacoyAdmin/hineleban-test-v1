@@ -22,42 +22,7 @@
     </ul>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul>
+
   </nav>
   <!-- /.navbar -->
 
@@ -93,32 +58,65 @@
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr>
-                      <th style="width: 10px">Product ID</th>
-                      <th>Job Order</th>
-                      <th>Received Date</th>
+                      <th style="width: 10px">Transaction ID</th>
+                      <th>Mode of Payment</th>
+                      <th>Mode of Transfer</th>
+                      <th>Total Price</th>
                       <th>Job Status</th>
-                      <th style="width: 40px">Active</th>
-                      <th>Action</th>
+                      <th>Customer ID</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                       @foreach($jo as $order)
-                    <td>{{$order->JobId}}</td>
-                    <td>{{$order->JobOrder}}</td>
-                    <td>{{$order->ReceivedDate}}</td>
-                    <td>{{$order->JobStatus}}</td>
-                    <td>{{$order->Active}}</td>
+                    <td># {{$order->transactionid}}</td>
+                    <td>{{$order->mop}}</td>
+                    <td>{{$order->transfer}}</td>
+                    <td>₱ {{$order->totalPrice}}.00</td>
+                    <td><?php
+                      $servername = "127.0.0.1";
+                      $username = "root";
+                      $password = "";
+                      $dbname = "hineleban_db";
+
+                      // Create connection
+                      $conn = new mysqli($servername, $username, $password, $dbname);
+                      // Check connection
+                      if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+
+                      $sql = "SELECT joname FROM jobstatustbl where jobstatusid=$order->jobstatusid";
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                          echo $row['joname'];
+                        }
+                      } else {
+                        echo "0";
+                      }
+                      $conn->close();
+                  ?></td>
+                    <td>{{$order->customerid}}</td>
                     <td>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-warning btn-flat">
-                          <i class="fas fa-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-primary btn-flat">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-flat">
-                          <i class="fas fa-trash"></i>
-                        </button>
+                    <a type="button" class="btn btn-warning btn-flat" href="./vieworder/">
+                          <i class="fas fa-eye"></i> View Order
+                       </a>
+
+                      <a type="button" class="btn btn-primary btn-flat" href="./manageproduct/update/">
+                          <i class="fas fa-edit"></i> Manage
+                       </a>
+                       @if($order->jobstatusid == 5)
+                       <a type="button" class="btn btn-danger btn-flat" href="./manageorder/reject/{{$order->transactionid}}" hidden>
+                          <i class="fas fa-trash"> </i> Rejected
+                       </a>
+                       @else
+                       <a type="button" class="btn btn-danger btn-flat" href="./manageorder/reject/{{$order->transactionid}}">
+                          <i class="fas fa-trash"> </i> Rejected
+                       </a>
+                       @endif
                       </div>
                     </td>
                     @endforeach

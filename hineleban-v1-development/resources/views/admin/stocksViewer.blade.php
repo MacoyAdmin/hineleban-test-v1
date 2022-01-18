@@ -112,7 +112,7 @@
                         die("Connection failed: " . $conn->connect_error);
                       }
 
-                      $sql = "SELECT sum(Quantity) AS value_qty FROM inventorytbls where productid=$item->ProductId and unit=$item->unit";
+                      $sql = "SELECT sum(Quantity) AS value_qty FROM inventorytbls where productid=$item->ProductId";
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                         // output data of each row
@@ -187,8 +187,8 @@
               ?></span></td>
                       <td>
                       <div class="btn-group">
-                      <a type="button" class="btn btn-warning btn-flat" href="./managestocks/view/{{$item->ProductId}}">
-                          <i class="fas fa-edit"> </i> Manage
+                      <a type="button" class="btn btn-warning btn-flat" href="../../../admin/managestocks/update/{{$item->ProductId}}">
+                          <i class="fas fa-edit"> </i> Update
                        </a>
                       </div>
                       </td>

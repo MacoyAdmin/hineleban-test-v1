@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class transactiontbl extends Model
 {
+    protected $primaryKey = 'transactionid';
     use HasFactory;
 }

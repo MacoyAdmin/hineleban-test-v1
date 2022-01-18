@@ -45,7 +45,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8">  
-          <form action="../../editproduct" method="POST" enctype="multipart/form-data">
+          <form action="../../edituser" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="text" name="id" value="{{$data['UserId']}}" hidden>
             <div class="form-row">

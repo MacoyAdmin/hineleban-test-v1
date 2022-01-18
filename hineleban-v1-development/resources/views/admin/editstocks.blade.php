@@ -22,7 +22,7 @@
     </ul>
 
     <!-- Right navbar links -->
-
+   
   </nav>
   <!-- /.navbar -->
 
@@ -36,7 +36,7 @@
         <div class="row mb-2">
           <div class="col-sm-12">
           <img src="{{URL::asset('/media/hineleban-logo.png')}}" class="img-fluid mx-auto d-block" alt="Responsive image">
-            <h1 class="m-0">Add New Product</h1>
+            <h1 class="m-0">Update Existing Stocks</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -48,58 +48,68 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-           
-          <form action="./addproduct" method="POST" enctype="multipart/form-data">
+          <form action="../../../admin/editstock" method="post">
             @csrf
+                <input type="text" name="id" value="{{$data['ProductId']}}" hidden>
             <div class="form-group col-md-8">
                 <label for="inputPassword4">Product Name</label>
-                <input type="text" class="form-control" name="productname" placeholder="Product Name">
-              </div>
-              <div class="form-group col-md-8">
-                <label for="inputPassword4">Product Description</label>
-                <textarea class="form-control" name="productdes" rows="3"></textarea>
+                <input type="text" class="form-control" name="Product Name" placeholder="Batch Code" value="<?php
+                  $servername = "127.0.0.1";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "hineleban_db";
+                    $prodid= $data['ProductId'];
+                  // Create connection
+                  $conn = new mysqli($servername, $username, $password, $dbname);
+                  // Check connection
+                  if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                  }
+
+                  $sql = "SELECT ProductName FROM productstbls where productid = $prodid ";
+                  $result = $conn->query($sql);
+                  if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                          echo $row["ProductName"];
+                    }
+                  } else {
+                    echo "0";
+                  }
+                  $conn->close();
+              ?>" disabled required>
+           
+                  
+                </select>
               </div>
               <div class="form-row">
                   <div class="form-group col-md-2">
-                  <label for="inputState">Category</label>
-                    <select name="category" class="form-control">
-                      <option>0</option>
-                      <option selected>1</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-2">
-                  <label for="inputState">IsFeatured </label>
-                    <select name="IsFeatured" class="form-control">
-                      <option value="0">False</option>
-                      <option value="1" selected>True</option>
-                    </select>
+                    <label for="inputPassword4">Quantity</label>
+                    <input type="number" class="form-control" name="quantity" placeholder="Quantity" min="1" step="1" value="{{$data['Quantity']}}" required>
                   </div>
 
                   <div class="form-group col-md-2">
                     <label for="inputPassword4">Unit</label>
-                    <input type="number" class="form-control" name="unit" placeholder="Unit" min="0.01" step=".01">
+                    <input type="number" class="form-control" name="unit" placeholder="Unit" min="0.01" step=".01" value="{{$data['unit']}}" required>
                   </div>
 
                   <div class="form-group col-md-2">
-                    <label for="inputPassword4">Price</label>
-                    <input type="number" class="form-control" name="price" placeholder="Price" step=".01" min="0.01">
+                    <label for="inputPassword4">Unit Type</label>
+                    <input type="text" class="form-control" name="unit_type" placeholder="Unit Type" min="0.01" step=".01" value="{{$data['unit_type']}}"  required>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputPassword4">Batch Code</label>
+                    <input type="number" class="form-control" name="batch" placeholder="Batch Code" value="{{$data['BatchCode']}}"  required>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-md-4">
-                    <label for="inputPassword4">Manufacturing Date</label>
-                    <input type="date" class="form-control" name="mfgdate">
+                    <label for="inputPassword4">Date Recieved</label>
+                    <input type="date" class="form-control" name="date_received" value="{{$data['ReceivedDate']}}" >
                   </div>
-                  <div class="form-group col-md-4">
-                    <label for="inputPassword4">Expiration Date</label>
-                    <input type="date" class="form-control" name="expdate" >
                   </div>
-              </div>
-                  <div class="mb-3 col-md-4">
-            <label for="formFile" class="form-label">Image</label>
-            <input class="form-control" type="file" name="file">
-          </div>
-            <button type="submit" class="btn btn-primary">Add Product</button>
+            
+            <button type="submit" class="btn btn-primary">Update Stock</button>
           </form>
    
           </div>
