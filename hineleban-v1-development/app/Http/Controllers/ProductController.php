@@ -61,7 +61,7 @@ class ProductController extends Controller
         return  view('welcome',['products'=> $products]);
    
     }
-    function submitUpdate(Request $req)
+    function submitUpdateProduct(Request $req)
     {
         $data = productstbl::find($req->id);
         $data->ProductName=$req->productname;

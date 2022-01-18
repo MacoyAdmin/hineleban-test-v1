@@ -59,7 +59,7 @@ class manageUserController extends Controller
         return redirect('admin/manageproduct');
         return $id;
     }
-    function submitUpdate(Request $req)
+    function submitUpdateUser(Request $req)
     {
         $data = usertbl::find($req->id);
         $data->FirstName=$req->firstname;

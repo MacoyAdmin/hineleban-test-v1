@@ -105,6 +105,9 @@ Route::get('/admin/managestock', function(){
 Route::get('/admin/manageorder', function(){
     return view('/admin/manageorder');
 });
+Route::get('/admin/vieworder', function(){
+    return view('/admin/vieworder');
+});
 Route::get('/admin/login', function(){
     return view('/admin/login');
 });
@@ -134,6 +137,8 @@ Route::get("admin/dashboard", [ProductController::class,'GetProductsStockDashboa
 Route::get("admin/managestock", [manageStock::class,'getStocks']);
 Route::get("admin/inventory", [manageStock::class,'getInventory']);
 Route::get("admin/manageorder", [managejobOrder::class,'getJO']);
+Route::get("admin/vieworder", [managejobOrder::class,'getJO']);
+Route::get("admin/manageorder/reject/{id}", [managejobOrder::class,'rejectOrder']);
 Route::get("admin/addstock", [ProductController::class,'GetProductsStock']);
 Route::get("admin/adduser", [rolesController::class,'GetRoles']);
 Route::get("admin/manageuser", [manageUserController::class,'GetUser']);
@@ -144,12 +149,16 @@ Route::get("orders", [cartController::class,'getTransaction']);
 Route::get("orderhistory", [cartController::class,'getTransactionHistory']);
 Route::get("admin/manageuser/update/{id}", [manageUserController::class,'updateData']);
 Route::get("admin/manageproduct/update/{id}", [manageUserController::class,'updateProduct']);
+Route::get("admin/managestock/update/{id}", [manageStock::class,'updateStock']);
 Route::get("admin/manageproduct/delete/{id}", [manageUserController::class,'disableProduct']);
 Route::get("admin/manageproduct/enable/{id}", [manageUserController::class,'enableProduct']);
 Route::get("admin/manageproduct/feature/{id}", [manageUserController::class,'featureProduct']);
+Route::get("admin/managestocks/update/{id}", [manageStock::class,'updateStocks']);
+Route::get("admin/managestocks/view/{id}", [manageStock::class,'viewStocks']);
 
-Route::post("admin/edituser", [manageUserController::class,'submitUpdate']);
-Route::post("admin/editproduct", [ProductController::class,'submitUpdate']);
+Route::post("admin/edituser", [manageUserController::class,'submitUpdateUser']);
+Route::post("admin/editproduct", [ProductController::class,'submitUpdateProduct']);
+Route::post("admin/editstock", [manageStock::class,'submitUpdateStock']);
 
 Route::get('/logout', function () {
     if(session()->has('firstname'))
@@ -166,4 +175,12 @@ Route::get('/logout', function () {
         session()->pull('province');
     }
     return redirect('/home');
+});
+Route::get('admin/logout', function () {
+    if(session()->has('FirstName'))
+    {
+        session()->pull('FirstName');
+        session()->pull('LastName');
+    }
+    return redirect('./admin/login');
 });

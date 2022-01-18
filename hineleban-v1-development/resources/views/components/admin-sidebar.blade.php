@@ -212,36 +212,8 @@
                 </a>
               </li>
             </ul>
-            <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Company</p>
-                </a>
-              </li>
-          </li>
           <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                <i class="nav-icon fas fa-cog"></i>
-                  <p>Settings</p>
-                </a>
-              </li>
-          </li>
-          <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                <i class="nav-icon fas fa-history"></i>
-                  <p>Activity Logs</p>
-                </a>
-              </li>
-          </li>
-          <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                  <p>Profile</p>
-                </a>
-              </li>
-          </li>
-          <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="../../../admin/logout" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                   <p>Logout</p>
                 </a>
