@@ -189,8 +189,94 @@
               </a>
             </div>
           </div>
+          
           <!-- ./col -->
         </div>
+        <div class="row">
+          <div class="col-md-12">
+           
+           <div class="card">
+               <div class="card-header">
+                 <h3 class="card-title">Product Inventory</h3>
+               </div>
+               <!-- /.card-header -->
+               <div class="card-body">
+                 <table id="example1" class="table table-bordered table-striped">
+                   <thead>
+                   <tr>
+                     <th>Product</th>
+                     <th>Batch Code</th>
+                     <th>Quantity</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+
+                 
+                   <?php
+                      $servername = "127.0.0.1";
+                      $username = "root";
+                      $password = "";
+                      $dbname = "hineleban_db";
+
+                      // Create connection
+                      $conn = new mysqli($servername, $username, $password, $dbname);
+                      // Check connection
+                      if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+
+                      $sql = "SELECT inventoryid,productid,batchcode,quantity FROM inventorytbls";
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+
+                          while($row = $result->fetch_assoc()) {
+                            $prodid = $row['productid'];
+                            $sqls = "SELECT productname FROM productstbls where productid = $prodid";
+                            $results = $conn->query($sqls);
+                            if ($results->num_rows > 0) {
+                              while($rows = $results->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>'.
+                            
+                           
+                              
+                                $rows['productname'];
+                              }
+                              
+                            }
+                            
+                            
+                            '</td>';
+                            echo '<td>'.$row['batchcode'].'</td>';
+                            if($row['quantity'] == 0){
+                              echo '<td> <span class="badge btn-danger">'.$row['quantity'].'</span></td>';
+                            }else if((1 <= $row['quantity']) && ($row['quantity'] <= 10)){
+                              echo '<td> <span class="badge btn-warning">'.$row['quantity'].'</span></td>';
+                            }
+                            else{
+                              echo '<td> <span class="badge btn-success">'.$row['quantity'].'</span></td>';
+                            }
+                            
+                            echo '</tr>';
+                          }
+                        
+                      } else {
+                        echo "0";
+                      }
+                      $conn->close();
+                  ?>
+                   
+                   </tfoot>
+                 </table>
+               </div>
+               <!-- /.card-body -->
+             </div>
+             <!-- /.card -->
+           </div>
+           <!-- /.col -->
+         </div>
+       
         <!-- /.row -->
       <div class="container-fluid">
         <!-- /.row -->
@@ -305,8 +391,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                <a href="../../../admin/manageorder" class="btn btn-sm btn-secondary float-right">View All Orders</a>
               </div>
               <!-- /.card-footer -->
             </div>
@@ -402,6 +487,42 @@
   <x-admin-footer/>
 </div>
 <!-- ./wrapper -->
+<script src="/../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="/../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/../plugins/jszip/jszip.min.js"></script>
+<script src="/../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 
 
 </body>

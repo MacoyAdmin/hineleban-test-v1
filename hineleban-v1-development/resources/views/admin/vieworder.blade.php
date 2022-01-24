@@ -59,20 +59,16 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">Transaction ID</th>
-                      <th>Mode of Payment</th>
-                      <th>Mode of Transfer</th>
-                      <th>Total Price</th>
-                      <th>Job Status</th>
-                      <th>Customer ID</th>
-                      <th>Actions</th>
+                      <th>Product Id</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>Returned Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                      @foreach($jo as $order)
+                      @foreach($job as $order)
+                      <tr>
                     <td># {{$order->transactionid}}</td>
-                    <td>{{$order->mop}}</td>
-                    <td>{{$order->transfer}}</td>
-                    <td>₱ {{$order->totalPrice}}.00</td>
                     <td><?php
                       $servername = "127.0.0.1";
                       $username = "root";
@@ -86,33 +82,23 @@
                         die("Connection failed: " . $conn->connect_error);
                       }
 
-                      $sql = "SELECT joname FROM jobstatustbl where jobstatusid=$order->jobstatusid";
+                      $sql = "SELECT productname FROM productstbls where productid=$order->ProductId";
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                         // output data of each row
                         while($row = $result->fetch_assoc()) {
-                          echo $row['joname'];
+                          echo $row['productname'];
+                         
                         }
                       } else {
-                        echo "0";
+                        echo "0 results";
                       }
                       $conn->close();
                   ?></td>
-                    <td>{{$order->customerid}}</td>
-                    <td>
-                    <div class="btn-group">
-                    <a type="button" class="btn btn-warning btn-flat" href="./manageproduct/feature/">
-                          <i class="fas fa-eye"></i> View Order
-                       </a>
-
-                      <a type="button" class="btn btn-primary btn-flat" href="./manageproduct/update/">
-                          <i class="fas fa-edit"></i> Manage
-                       </a>
-                       <a type="button" class="btn btn-danger btn-flat" href="./manageorder/reject/{{$order->transactionid}}">
-                          <i class="fas fa-trash"> </i> Rejected
-                       </a>
-                      </div>
-                    </td>
+                    <td>{{$order->Quantity}}</td>
+                    <td>{{$order->Price}}</td>
+                    <td>{{$order->isReturned}}</td>
+</tr>
                     @endforeach
                   </tbody>
                 </table>

@@ -187,7 +187,7 @@
               ?></span></td>
                       <td>
                       <div class="btn-group">
-                      <a type="button" class="btn btn-warning btn-flat" href="../../../admin/managestocks/update/{{$item->ProductId}}">
+                      <a type="button" class="btn btn-warning btn-flat" href="../../../admin/managestocks/update/{{$item->InventoryId}}">
                           <i class="fas fa-edit"> </i> Update
                        </a>
                       </div>

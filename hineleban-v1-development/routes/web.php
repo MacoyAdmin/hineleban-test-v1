@@ -114,6 +114,9 @@ Route::get('/admin/login', function(){
 Route::get('/admin/inventory', function(){
     return view('/admin/inventory');
 });
+Route::post('/admin/updateStatusStocks', function(){
+    return view('/admin/updateStatusStocks');
+});
 Route::post("admin/dashboard", [adminLogin::class,'getData']);
 Route::view("admin/login","admin/login");
 
@@ -135,10 +138,12 @@ Route::get("admin/manageproduct", [ProductController::class,'GetProductsStockMan
 Route::get("admin/dashboard", [ProductController::class,'GetProductsStockDashboard']);
 
 Route::get("admin/managestock", [manageStock::class,'getStocks']);
+Route::get("admin/orderUpdate", [manageJobOrder::class,'getJobStatus']);
 Route::get("admin/inventory", [manageStock::class,'getInventory']);
 Route::get("admin/manageorder", [managejobOrder::class,'getJO']);
 Route::get("admin/vieworder", [managejobOrder::class,'getJO']);
 Route::get("admin/manageorder/reject/{id}", [managejobOrder::class,'rejectOrder']);
+Route::get("admin/manageorder/update/{id}", [managejobOrder::class,'updateOrders']);
 Route::get("admin/addstock", [ProductController::class,'GetProductsStock']);
 Route::get("admin/adduser", [rolesController::class,'GetRoles']);
 Route::get("admin/manageuser", [manageUserController::class,'GetUser']);
@@ -155,11 +160,11 @@ Route::get("admin/manageproduct/enable/{id}", [manageUserController::class,'enab
 Route::get("admin/manageproduct/feature/{id}", [manageUserController::class,'featureProduct']);
 Route::get("admin/managestocks/update/{id}", [manageStock::class,'updateStocks']);
 Route::get("admin/managestocks/view/{id}", [manageStock::class,'viewStocks']);
-
+Route::get("admin/vieworder/{id}", [managejobOrder::class,'viewOrder']);
 Route::post("admin/edituser", [manageUserController::class,'submitUpdateUser']);
 Route::post("admin/editproduct", [ProductController::class,'submitUpdateProduct']);
 Route::post("admin/editstock", [manageStock::class,'submitUpdateStock']);
-
+Route::post("admin/edittransaction", [managejobOrder::class,'submitUpdatetransaction']);
 Route::get('/logout', function () {
     if(session()->has('firstname'))
     {
