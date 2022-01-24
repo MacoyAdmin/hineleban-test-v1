@@ -50,7 +50,7 @@
           <div class="col-md-12">
           <form action="../../../admin/editstock" method="post">
             @csrf
-                <input type="text" name="id" value="{{$data['ProductId']}}" hidden>
+                <input type="text" name="id" value="{{$data['InventoryId']}}" hidden>
             <div class="form-group col-md-8">
                 <label for="inputPassword4">Product Name</label>
                 <input type="text" class="form-control" name="Product Name" placeholder="Batch Code" value="<?php
@@ -58,7 +58,7 @@
                   $username = "root";
                   $password = "";
                   $dbname = "hineleban_db";
-                    $prodid= $data['ProductId'];
+                    $prodid= $data['InventoryId'];
                   // Create connection
                   $conn = new mysqli($servername, $username, $password, $dbname);
                   // Check connection

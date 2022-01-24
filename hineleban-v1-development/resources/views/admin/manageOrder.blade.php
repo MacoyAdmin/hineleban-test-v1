@@ -101,11 +101,11 @@
                     <td>{{$order->customerid}}</td>
                     <td>
                     <div class="btn-group">
-                    <a type="button" class="btn btn-warning btn-flat" href="./vieworder/">
+                    <a type="button" class="btn btn-warning btn-flat" href="./vieworder/{{$order->transactionid}}">
                           <i class="fas fa-eye"></i> View Order
                        </a>
 
-                      <a type="button" class="btn btn-primary btn-flat" href="./manageproduct/update/">
+                      <a type="button" class="btn btn-primary btn-flat" href="./manageorder/update/{{$order->transactionid}}">
                           <i class="fas fa-edit"></i> Manage
                        </a>
                        @if($order->jobstatusid == 5)

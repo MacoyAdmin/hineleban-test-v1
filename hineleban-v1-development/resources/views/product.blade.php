@@ -16,6 +16,32 @@
         <h3 style="margin-top:20px">{{$item->ProductName}}</h3><br><br>
         <h5><strong>Description</strong></h5>
         <p>{{$item->ProductName}}</p><br>
+        <p><strong>Available Stocks : </strong><?php
+                      $servername = "127.0.0.1";
+                      $username = "root";
+                      $password = "";
+                      $dbname = "hineleban_db";
+
+                      // Create connection
+                      $conn = new mysqli($servername, $username, $password, $dbname);
+                      // Check connection
+                      if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+
+                      $sql = "SELECT sum(Quantity) AS value_qty FROM inventorytbls where productid=$item->ProductId";
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                          echo $row['value_qty'];
+                         
+                        }
+                      } else {
+                        echo "0";
+                      }
+                      $conn->close();
+                  ?></p>
         <p><i>{{$item->ProductDes}}</i></p>
         <h3 style="color:#FFA500">₱{{$item->Price}}.00</h3>
         <p>Quantity</p>
@@ -28,7 +54,34 @@
             <input type="text" name="ProductId" value="{{$item->ProductId}}" hidden/>
             <input type="text" name="Price" value="{{$item->Price}}" hidden/>
             <input type="text" name="customerId" value="{{session('customerId')}}" hidden/>
-            <button class="btn btn-primary" type="submit">Add to Cart</button>
+            <button class="btn btn-primary" type="submit" <?php
+                      $servername = "127.0.0.1";
+                      $username = "root";
+                      $password = "";
+                      $dbname = "hineleban_db";
+
+                      // Create connection
+                      $conn = new mysqli($servername, $username, $password, $dbname);
+                      // Check connection
+                      if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+
+                      $sql = "SELECT sum(Quantity) AS value_qty FROM inventorytbls where productid=$item->ProductId";
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                          if($row['value_qty'] == 0){
+                            echo 'disabled';
+                          }
+                         
+                        }
+                      } else {
+                        echo "0";
+                      }
+                      $conn->close();
+                  ?>> Add to Cart</button>
             </form>
           </div>
       </div>

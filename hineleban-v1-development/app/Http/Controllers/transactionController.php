@@ -26,4 +26,13 @@ class transactionController extends Controller
         }
         return redirect('/invoice');
     }
+    function GetInventory()
+    {
+        
+        $inventory =  DB::select('select * from inventorytbls');
+        //session()->put('productInfo', $products);
+    
+        return  view('admin/dashboard',['inventory'=> $inventory]);
+   
+    }
 }

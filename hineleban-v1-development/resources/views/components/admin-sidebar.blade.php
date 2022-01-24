@@ -106,13 +106,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manual Order</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./manageorder" class="nav-link">
+                <a href="../../../admin/manageorder" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Order</p>
                 </a>
