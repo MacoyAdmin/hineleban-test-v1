@@ -63,8 +63,9 @@
                   <div class="form-group col-md-2">
                   <label for="inputState">Category</label>
                     <select name="category" class="form-control">
-                      <option>0</option>
-                      <option selected>1</option>
+                      <option>Whole Bean</option>
+                      <option selected>Ground Bean</option>
+                      <option selected>NONE</option>
                     </select>
                   </div>
                   <div class="form-group col-md-2">

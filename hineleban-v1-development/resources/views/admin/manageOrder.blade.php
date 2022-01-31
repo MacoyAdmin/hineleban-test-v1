@@ -69,6 +69,7 @@
                   </thead>
                   <tbody>
                       @foreach($jo as $order)
+                    <tr>
                     <td># {{$order->transactionid}}</td>
                     <td>{{$order->mop}}</td>
                     <td>{{$order->transfer}}</td>
@@ -119,6 +120,7 @@
                        @endif
                       </div>
                     </td>
+                    </tr>
                     @endforeach
                   </tbody>
                 </table>
