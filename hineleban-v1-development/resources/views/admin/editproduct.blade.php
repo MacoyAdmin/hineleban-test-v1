@@ -57,12 +57,14 @@
                     <textarea class="form-control" name="productdes" rows="3" required>{{$data['ProductDes']}}</textarea>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-3">
-                    <label for="inputState">Category</label>
-                        <select name="category" class="form-control">
-                        <option value="{{$data['Category']}}" selected>{{$data['Category']}}</option>
-                        </select>
-                    </div>
+                  <div class="form-group col-md-2">
+                  <label for="inputState">Category</label>
+                    <select name="category" class="form-control">
+                      <option>Whole Bean</option>
+                      <option selected>Ground Bean</option>
+                      <option selected>NONE</option>
+                    </select>
+                  </div>
                     <div class="form-group col-md-3">
                     <label for="inputState">IsFeatured </label>
                         <select name="IsFeatured" class="form-control">

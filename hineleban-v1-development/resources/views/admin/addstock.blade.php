@@ -74,6 +74,7 @@
                     <label for="inputPassword4">Unit Type</label>
                     <input type="text" class="form-control" name="unit_type" placeholder="Unit Type" min="0.01" step=".01" required>
                   </div>
+                  
                   <div class="form-group col-md-2">
                     <label for="inputPassword4">Batch Code</label>
                     <input type="number" class="form-control" name="batch" placeholder="Batch Code" required>

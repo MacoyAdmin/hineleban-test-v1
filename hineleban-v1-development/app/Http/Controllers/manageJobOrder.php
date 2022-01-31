@@ -31,7 +31,7 @@ class manageJobOrder extends Controller
          $data->mop=$req->mop;
         $data->transfer=$req->mot;
          $data->jobstatusid=$req->jobstat;
-         if($req->jobstat == 2)
+         if($req->jobstat == 5)
          {
             $inv = inventorytbl::find(2);
             $inv->Quantity=$inv->Quantity - 1;

@@ -28,7 +28,7 @@ $customerId = session('customerId');
                       <td>{{$item->transactionid}}</td>
                       <td>{{$item->transfer}}</td>
                       <td>₱ {{$item->totalPrice}}.00</td>
-                      <td><span class="badge <?php if($item->jobstatusid!=5){echo "bg-primary";}?>"><?php
+                      <td><span class="badge <?php if($item->jobstatusid!=5){echo "bg-primary";}else if($item->jobstatusid==5){echo "bg-danger";}?>"><?php
                       $servername = "127.0.0.1";
                       $username = "root";
                       $password = "";
